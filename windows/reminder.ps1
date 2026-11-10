@@ -292,7 +292,7 @@ function Set-FundalDesign($window, $design, [switch]$Salveaza) {
     if ($implicit) {
         $border.BorderBrush = New-Object Windows.Media.SolidColorBrush (Get-MediaColor @(0.62, 0.50, 0.92))
     } else {
-        $inchis = @($bordRgb[0] * 0.72, $bordRgb[1] * 0.72, $bordRgb[2] * 0.72)
+        $inchis = @(($bordRgb[0] * 0.72), ($bordRgb[1] * 0.72), ($bordRgb[2] * 0.72))
         $border.BorderBrush = New-Object Windows.Media.SolidColorBrush (Get-MediaColor $inchis)
     }
     $intunecat = (Get-Luminanta $lista) -lt 0.45
@@ -441,7 +441,7 @@ $xaml = @"
           </StackPanel>
         </Border>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
-          <StackPanel VerticalAlignment="Center" Width="250" Margin="0,0,16,0">
+          <StackPanel VerticalAlignment="Center" MinWidth="250" Margin="0,0,16,0">
             <TextBlock x:Name="DataZi" FontFamily="Segoe UI, Helvetica Neue, Arial"
                        FontSize="34.67" FontWeight="Medium" TextAlignment="Right" Foreground="#0D0A17"/>
             <TextBlock x:Name="DataLuna" FontFamily="Segoe UI, Helvetica Neue, Arial"
