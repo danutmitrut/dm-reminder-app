@@ -12,7 +12,7 @@ Alege sistemul tău, Mac sau Windows, și urmează doar partea aceea.
 
 Din pachetul „Remindere pentru cursanti”, trebuie copiat tot conținutul folderului `mac` în folderul `Remindere` din directorul tău de utilizator. Calea finală arată așa: `/Users/NUMELE_TAU/Remindere/`.
 
-Copiază acolo și fișierele `GHID.md` și `INSTRUCTIUNI-PENTRU-CLAUDE.md` din rădăcina pachetului, ca să le aibă Claude la îndemână.
+Copiază acolo și fișierele `README.md`, `GHID-RAPID.md` și `INSTRUCTIUNI-PENTRU-CLAUDE.md` din rădăcina pachetului, ca să le aibă Claude la îndemână.
 
 Cel mai simplu: deschizi Terminalul, mergi în folderul pachetului (cel primit de la curs) și scrii:
 
@@ -88,7 +88,7 @@ Atenție: varianta de Windows nu a fost încă încercată pe un calculator real
 
 Din pachetul „Remindere pentru cursanti”, copiază tot conținutul folderului `windows` în folderul `Remindere` din directorul tău de utilizator. Calea finală arată așa: `C:\Users\NUMELE_TAU\Remindere\`.
 
-Copiază acolo și fișierele `GHID.md` și `INSTRUCTIUNI-PENTRU-CLAUDE.md` din rădăcina pachetului.
+Copiază acolo și fișierele `README.md`, `GHID-RAPID.md` și `INSTRUCTIUNI-PENTRU-CLAUDE.md` din rădăcina pachetului.
 
 Cel mai simplu: deschizi PowerShell, mergi în folderul pachetului și scrii:
 

@@ -188,7 +188,7 @@ function ConvertTo-JsonIngrijit($Obj, [int]$Nivel = 0) {
         foreach ($k in $Obj.Keys) {
             $piese += ('{0}{1}: {2}' -f $pad2, (& $esc $k), (ConvertTo-JsonIngrijit $Obj[$k] ($Nivel + 1)))
         }
-        return "{\n$($piese -join ",\n")\n$pad}"
+        return "{$([Environment]::NewLine)$($piese -join (',' + [Environment]::NewLine))$([Environment]::NewLine)$pad}"
     }
     # PSCustomObject
     $props = @($Obj.PSObject.Properties)
@@ -202,11 +202,7 @@ function ConvertTo-JsonIngrijit($Obj, [int]$Nivel = 0) {
     return (& $esc ([string]$Obj))
 }
 
-# Bug in my ConvertTo-JsonIngrijit for hashtables: I used literal \n instead of newlines.
-# I'll fix by not using that branch much; lista is PSCustomObject.
-
 $jsonNou = (ConvertTo-JsonIngrijit $lista 0) + [Environment]::NewLine
-# Fix accidental \n sequences if any from hashtable branch (not used for root).
 $utf8Bom = New-Object System.Text.UTF8Encoding $true
 [System.IO.File]::WriteAllText($JsonPath, $jsonNou, $utf8Bom)
 

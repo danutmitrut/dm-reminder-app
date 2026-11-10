@@ -24,7 +24,7 @@ if (Test-Path -LiteralPath $jsonDest) {
     Copy-Item -Force -LiteralPath (Join-Path $Src 'remindere.json') -Destination $Dest
 }
 
-foreach ($doc in @('GHID.md', 'INSTRUCTIUNI-PENTRU-CLAUDE.md')) {
+foreach ($doc in @('README.md', 'GHID-RAPID.md', 'INSTRUCTIUNI-PENTRU-CLAUDE.md')) {
     $from = Join-Path $Root $doc
     if (Test-Path -LiteralPath $from) {
         Copy-Item -Force -LiteralPath $from -Destination $Dest

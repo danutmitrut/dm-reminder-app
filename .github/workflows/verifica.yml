@@ -1,0 +1,29 @@
+name: Verifică scripturile
+on: [push, pull_request]
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Un singur BOM și sintaxă corectă (Windows PowerShell 5.1)
+        shell: powershell
+        run: |
+          $rau = 0
+          foreach ($f in Get-ChildItem windows\*.ps1) {
+            $b = [IO.File]::ReadAllBytes($f.FullName)
+            $unBom = $b.Length -ge 3 -and $b[0] -eq 0xEF -and $b[1] -eq 0xBB -and $b[2] -eq 0xBF
+            $dublu = $b.Length -ge 6 -and $b[3] -eq 0xEF -and $b[4] -eq 0xBB -and $b[5] -eq 0xBF
+            if (-not $unBom -or $dublu) { Write-Host "$($f.Name): BOM greșit"; $rau++ }
+            $e = $null; $t = $null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($f.FullName, [ref]$t, [ref]$e)
+            if ($e.Count -gt 0) { Write-Host "$($f.Name): $($e.Count) erori"; $e | % { Write-Host $_ }; $rau++ }
+          }
+          if ($rau -gt 0) { exit 1 }
+  mac:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sintaxă zsh și JXA
+        run: |
+          for f in mac/*.sh; do zsh -n "$f"; done
+          osacompile -l JavaScript -o /tmp/reminder.scpt mac/reminder.js

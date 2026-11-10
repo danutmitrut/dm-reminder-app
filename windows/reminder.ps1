@@ -1,4 +1,4 @@
-﻿﻿﻿# reminder.ps1: arată un reminder din remindere.json (WPF).
+﻿# reminder.ps1: arată un reminder din remindere.json (WPF).
 # Folosire: powershell.exe -STA -NoProfile -ExecutionPolicy Bypass -File reminder.ps1 -Id <id>
 # Salvat UTF-8 cu BOM, pentru diacritice în Windows PowerShell 5.1.
 # „Am înțeles” sau Enter închid fereastra. „Repetă în” o ascunde și o readuce după N minute.
@@ -26,7 +26,6 @@ if ([System.Threading.Thread]::CurrentThread.GetApartmentState() -ne 'STA') {
 Add-Type -AssemblyName PresentationFramework
 Add-Type -AssemblyName PresentationCore
 Add-Type -AssemblyName WindowsBase
-Add-Type -AssemblyName System.Media
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 

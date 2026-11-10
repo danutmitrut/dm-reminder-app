@@ -20,12 +20,11 @@ else
   cp -f "$SRC/remindere.json" "$DEST/"
 fi
 
-if [[ -f "$ROOT/GHID.md" ]]; then
-  cp -f "$ROOT/GHID.md" "$DEST/"
-fi
-if [[ -f "$ROOT/INSTRUCTIUNI-PENTRU-CLAUDE.md" ]]; then
-  cp -f "$ROOT/INSTRUCTIUNI-PENTRU-CLAUDE.md" "$DEST/"
-fi
+for doc in README.md GHID-RAPID.md INSTRUCTIUNI-PENTRU-CLAUDE.md; do
+  if [[ -f "$ROOT/$doc" ]]; then
+    cp -f "$ROOT/$doc" "$DEST/"
+  fi
+done
 
 echo "Gata. Fișierele sunt în $DEST"
 echo "Ca să adaugi un reminder, scrie titlul și textul în $DEST/remindere.json,"
