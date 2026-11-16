@@ -186,7 +186,7 @@ function inchidePanouCulori() {
 function opresteTimer() {
   try {
     if (ctxFereastra && ctxFereastra.timer) {
-      ctxFereastra.timer.invalidate();
+      ctxFereastra.timer.invalidate;
       ctxFereastra.timer = null;
     }
   } catch (e) {}
@@ -707,7 +707,7 @@ function arataFereastra(titlu, text, dir) {
   opresteTimer();
   inchidePanouCulori();
   win.orderOut(null);
-  win.close();
+  win.close;
   return stare.iesire;
 }
 
