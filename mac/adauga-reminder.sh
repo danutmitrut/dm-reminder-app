@@ -284,15 +284,17 @@ sablon=${sablon//__CALE_SCRIPT__/$CALE_X}
 sablon=${sablon//__ID__/$ID_X}
 sablon=${sablon//__CALE_ERR__/$ERR_X}
 sablon=${sablon//__CALE_OUT__/$OUT_X}
-# INTERVAL poate conține newline: îl înlocuim prin python-free cu awk.
-tmp="${TMPDIR:-/tmp}/sablon-reminder-$$.plist"
-print -r -- "$sablon" > "$tmp"
-# awk pentru blocul multi-linie
-awk -v interval="$INTERVAL" '{
-  if ($0 ~ /__INTERVAL__/) { print interval; next }
-  print
-}' "$tmp" > "$PLIST"
-rm -f "$tmp"
+# INTERVAL are mai multe linii: înlocuirea din zsh le păstrează, fără awk.
+sablon=${sablon//__INTERVAL__/$INTERVAL}
+# Scriem întâi lângă destinație, apoi mutăm atomic, doar dacă scrierea a reușit.
+# Astfel un eșec nu lasă un plist gol în LaunchAgents.
+tmp="${PLIST}.$$.tmp"
+if [[ -z "$sablon" ]] || ! print -r -- "$sablon" > "$tmp"; then
+  rm -f "$tmp"
+  echo "Nu am putut scrie programarea. $PLIST a rămas neschimbat."
+  exit 1
+fi
+mv "$tmp" "$PLIST"
 
 UID_NUM="$(id -u)"
 # Dacă e deja armat, îl descărcăm întâi, apoi îl încărcăm din nou.
